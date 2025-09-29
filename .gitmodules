@@ -1,3 +1,6 @@
 [submodule "motion-vote-backend"]
 	path = motion-vote-backend
 	url = https://github.com/CompPsyUnion/motion-vote-backend.git
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/buduan/motion-vote-frontend
