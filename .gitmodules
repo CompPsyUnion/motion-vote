@@ -1,0 +1,3 @@
+[submodule "motion-vote-backend"]
+	path = motion-vote-backend
+	url = https://github.com/CompPsyUnion/motion-vote-backend.git
