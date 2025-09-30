@@ -48,5 +48,10 @@
         "vuepress",
         "webassets",
         "wscript"
-    ]
+    ],
+  "github.copilot.advanced": {
+    "commitMessage": {
+      "prompt": "Create commit messages in English."
+    }
+  }
 }
