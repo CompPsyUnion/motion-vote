@@ -1,83 +1,56 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.0.1",
   "info": {
-    "title": "Motion Vote API",
+    "title": "Motion Vote Api",
     "description": "辩论活动实时投票互动系统 - 后端API接口文档\n\n本系统为辩论赛事提供完整的实时投票互动解决方案，支持活动组织者高效管理辩论赛事，为现场观众提供便捷的投票互动体验，并通过大屏实时展示投票数据。\n\n## 核心功能模块\n- 用户管理：注册登录、权限控制\n- 活动管理：创建活动、协作管理、参与者管理\n- 辩题管理：创建辩题、状态控制、实时切换\n- 投票系统：参与者入场、投票改票、结果锁定\n- 大屏展示：实时数据展示、主题控制\n- 数据统计：实时看板、活动报告、数据导出\n\n## 认证方式\n- JWT Token认证\n- 参与者通过活动ID+编号验证\n\n## 实时通信\n- WebSocket支持实时数据推送\n- 支持投票更新、辩题切换、状态变更等事件",
-    "version": "1.0.0",
-    "contact": {
-      "name": "Computer Psycho Union",
-      "email": "computerpsychounion@nottingham.edu.cn"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    "version": "1.0.0"
   },
-  "servers": [
-    {
-      "url": "https://api.motionvote.ibuduan.com",
-      "description": "生产环境"
-    },
-    {
-      "url": "https://staging-api.motionvote.ibuduan.com",
-      "description": "测试环境"
-    },
-    {
-      "url": "http://localhost:8000",
-      "description": "开发环境"
-    }
-  ],
   "tags": [
     {
-      "name": "auth",
-      "description": "认证相关接口"
+      "name": "auth"
     },
     {
-      "name": "users",
-      "description": "用户管理"
+      "name": "users"
     },
     {
-      "name": "activities",
-      "description": "活动管理"
+      "name": "debates"
     },
     {
-      "name": "debates",
-      "description": "辩题管理"
+      "name": "activities"
     },
     {
-      "name": "participants",
-      "description": "参与者管理"
+      "name": "participants"
     },
     {
-      "name": "votes",
-      "description": "投票系统"
+      "name": "votes"
     },
     {
-      "name": "screen",
-      "description": "大屏展示"
+      "name": "screen"
     },
     {
-      "name": "statistics",
-      "description": "数据统计"
-    },
-    {
-      "name": "websocket",
-      "description": "WebSocket实时通信"
+      "name": "statistics"
     }
   ],
   "paths": {
     "/api/auth/register": {
       "post": {
-        "tags": ["auth"],
         "summary": "用户注册",
+        "deprecated": false,
         "description": "系统管理员和活动主办方注册账号",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["email", "password", "name"],
+                "required": [
+                  "email",
+                  "password",
+                  "name"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -98,6 +71,12 @@
                     "description": "手机号（可选）"
                   }
                 }
+              },
+              "example": {
+                "email": "test@example.com",
+                "password": "12345678",
+                "name": "吴晨",
+                "phone": "16656485702"
               }
             }
           }
@@ -111,7 +90,8 @@
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "400": {
             "description": "请求参数错误",
@@ -121,7 +101,8 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "409": {
             "description": "邮箱已存在",
@@ -131,23 +112,35 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["auth"],
         "summary": "用户登录",
+        "deprecated": false,
         "description": "用户登录获取JWT Token",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["email", "password"],
+                "required": [
+                  "email",
+                  "password"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -159,6 +152,10 @@
                     "description": "密码"
                   }
                 }
+              },
+              "example": {
+                "email": "test@example.com",
+                "password": "12345678"
               }
             }
           }
@@ -193,7 +190,8 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "401": {
             "description": "认证失败",
@@ -203,21 +201,26 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/auth/refresh": {
       "post": {
-        "tags": ["auth"],
         "summary": "刷新Token",
+        "deprecated": false,
         "description": "刷新JWT Token",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "tags": [
+          "auth"
         ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "刷新成功",
@@ -245,23 +248,34 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/auth/forgot-password": {
       "post": {
-        "tags": ["auth"],
         "summary": "忘记密码",
+        "deprecated": false,
         "description": "发送密码重置邮件",
+        "tags": [
+          "auth"
+        ],
+        "parameters": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["email"],
+                "required": [
+                  "email"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -271,7 +285,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -282,21 +297,26 @@
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/users/profile": {
       "get": {
-        "tags": ["users"],
         "summary": "获取用户信息",
+        "deprecated": false,
         "description": "获取当前登录用户的详细信息",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "tags": [
+          "users"
         ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "获取成功",
@@ -318,21 +338,25 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      },
-      "put": {
-        "tags": ["users"],
-        "summary": "更新用户信息",
-        "description": "更新当前登录用户的信息",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      },
+      "put": {
+        "summary": "更新用户信息",
+        "deprecated": false,
+        "description": "更新当前登录用户的信息",
+        "tags": [
+          "users"
         ],
+        "parameters": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -353,7 +377,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -364,26 +389,31 @@
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/users": {
-      "get": {
-        "tags": ["users"],
-        "summary": "获取用户列表",
-        "description": "系统管理员获取所有用户列表",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "获取用户列表",
+        "deprecated": false,
+        "description": "系统管理员获取所有用户列表",
+        "tags": [
+          "users"
         ],
         "parameters": [
           {
             "name": "page",
             "in": "query",
             "description": "页码",
+            "required": false,
             "schema": {
               "type": "integer",
               "default": 1
@@ -393,6 +423,7 @@
             "name": "limit",
             "in": "query",
             "description": "每页数量",
+            "required": false,
             "schema": {
               "type": "integer",
               "default": 20
@@ -402,6 +433,7 @@
             "name": "search",
             "in": "query",
             "description": "搜索关键词",
+            "required": false,
             "schema": {
               "type": "string"
             }
@@ -428,566 +460,32 @@
                   ]
                 }
               }
-            }
-          }
-        }
-      }
-    },
-    "/api/activities": {
-      "get": {
-        "tags": ["activities"],
-        "summary": "获取活动列表",
-        "description": "获取用户创建和参与的活动列表",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "description": "页码",
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "每页数量",
-            "schema": {
-              "type": "integer",
-              "default": 20
-            }
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "活动状态筛选",
-            "schema": {
-              "type": "string",
-              "enum": ["upcoming", "ongoing", "ended"]
-            }
-          },
-          {
-            "name": "role",
-            "in": "query",
-            "description": "用户角色筛选",
-            "schema": {
-              "type": "string",
-              "enum": ["owner", "collaborator"]
-            }
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "description": "搜索关键词",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "获取成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/PaginatedActivities"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["activities"],
-        "summary": "创建活动",
-        "description": "创建新的辩论活动",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["name", "startTime", "endTime", "location", "description"],
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "活动名称"
-                  },
-                  "startTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "开始时间"
-                  },
-                  "endTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "结束时间"
-                  },
-                  "location": {
-                    "type": "string",
-                    "description": "活动地点"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "活动描述"
-                  },
-                  "coverImage": {
-                    "type": "string",
-                    "description": "封面图片URL"
-                  },
-                  "expectedParticipants": {
-                    "type": "integer",
-                    "description": "预计参与人数"
-                  },
-                  "tags": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "活动标签"
-                  },
-                  "settings": {
-                    "$ref": "#/components/schemas/ActivitySettings"
-                  }
-                }
-              }
-            }
+            },
+            "headers": {}
           }
         },
-        "responses": {
-          "201": {
-            "description": "创建成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/Activity"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/activities/{activityId}": {
-      "get": {
-        "tags": ["activities"],
-        "summary": "获取活动详情",
-        "description": "获取指定活动的详细信息",
         "security": [
           {
             "bearerAuth": []
           }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "获取成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/ActivityDetail"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["activities"],
-        "summary": "更新活动",
-        "description": "更新活动信息",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "活动名称"
-                  },
-                  "startTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "开始时间"
-                  },
-                  "endTime": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "结束时间"
-                  },
-                  "location": {
-                    "type": "string",
-                    "description": "活动地点"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "活动描述"
-                  },
-                  "coverImage": {
-                    "type": "string",
-                    "description": "封面图片URL"
-                  },
-                  "settings": {
-                    "$ref": "#/components/schemas/ActivitySettings"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "更新成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["activities"],
-        "summary": "删除活动",
-        "description": "删除指定活动",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "删除成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/activities/{activityId}/collaborators": {
-      "get": {
-        "tags": ["activities"],
-        "summary": "获取协作者列表",
-        "description": "获取活动的协作者列表",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "获取成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/Collaborator"
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": ["activities"],
-        "summary": "邀请协作者",
-        "description": "邀请用户成为活动协作者",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["email", "permissions"],
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "format": "email",
-                    "description": "被邀请用户邮箱"
-                  },
-                  "permissions": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": ["view", "edit", "control"]
-                    },
-                    "description": "权限列表"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "邀请成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/activities/{activityId}/collaborators/{collaboratorId}": {
-      "put": {
-        "tags": ["activities"],
-        "summary": "更新协作者权限",
-        "description": "更新协作者的权限设置",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "collaboratorId",
-            "in": "path",
-            "required": true,
-            "description": "协作者ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["permissions"],
-                "properties": {
-                  "permissions": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "enum": ["view", "edit", "control"]
-                    },
-                    "description": "权限列表"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "更新成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": ["activities"],
-        "summary": "移除协作者",
-        "description": "从活动中移除协作者",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "collaboratorId",
-            "in": "path",
-            "required": true,
-            "description": "协作者ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "移除成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
+        ]
       }
     },
     "/api/activities/{activityId}/debates": {
       "get": {
-        "tags": ["debates"],
         "summary": "获取辩题列表",
+        "deprecated": false,
         "description": "获取活动下的所有辩题",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "tags": [
+          "debates"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1017,37 +515,45 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      },
-      "post": {
-        "tags": ["debates"],
-        "summary": "创建辩题",
-        "description": "为活动创建新的辩题",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      },
+      "post": {
+        "summary": "创建辩题",
+        "deprecated": false,
+        "description": "为活动创建新的辩题",
+        "tags": [
+          "debates"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["title", "proDescription", "conDescription"],
+                "required": [
+                  "title",
+                  "proDescription",
+                  "conDescription"
+                ],
                 "properties": {
                   "title": {
                     "type": "string",
@@ -1074,6 +580,13 @@
                     "description": "排序号"
                   }
                 }
+              },
+              "example": {
+                "title": "我是一个非常聪明的辩题",
+                "proDescription": "正方是对的",
+                "conDescription": "反方是对的",
+                "background": "aute proident do",
+                "estimatedDuration": 18
               }
             }
           }
@@ -1099,22 +612,32 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
-    "/api/debates/{debateId}": {
+    "/api/activities/{activityId}/collaborators": {
       "get": {
-        "tags": ["debates"],
-        "summary": "获取辩题详情",
-        "description": "获取指定辩题的详细信息",
+        "summary": "获取协作者列表",
+        "deprecated": false,
+        "description": "获取活动的协作者列表",
+        "tags": [
+          "activities"
+        ],
         "parameters": [
           {
-            "name": "debateId",
+            "name": "activityId",
             "in": "path",
+            "description": "活动ID",
             "required": true,
-            "description": "辩题ID",
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1134,65 +657,156 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "$ref": "#/components/schemas/DebateDetail"
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Collaborator"
+                          }
                         }
                       }
                     }
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      },
-      "put": {
-        "tags": ["debates"],
-        "summary": "更新辩题",
-        "description": "更新辩题信息",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      },
+      "post": {
+        "summary": "邀请协作者",
+        "deprecated": false,
+        "description": "邀请用户成为活动协作者",
+        "tags": [
+          "activities"
         ],
         "parameters": [
           {
-            "name": "debateId",
+            "name": "activityId",
             "in": "path",
+            "description": "活动ID",
             "required": true,
-            "description": "辩题ID",
+            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": [
+                  "email",
+                  "permissions"
+                ],
                 "properties": {
-                  "title": {
+                  "email": {
                     "type": "string",
-                    "description": "辩题标题"
+                    "format": "email",
+                    "description": "被邀请用户邮箱"
                   },
-                  "proDescription": {
-                    "type": "string",
-                    "description": "正方观点描述"
-                  },
-                  "conDescription": {
-                    "type": "string",
-                    "description": "反方观点描述"
-                  },
-                  "background": {
-                    "type": "string",
-                    "description": "辩题背景介绍"
-                  },
-                  "estimatedDuration": {
-                    "type": "integer",
-                    "description": "预计辩论时长（分钟）"
+                  "permissions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "view",
+                        "edit",
+                        "control"
+                      ]
+                    },
+                    "description": "权限列表"
                   }
                 }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "邀请成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/activities/{activityId}/collaborators/{collaboratorId}": {
+      "put": {
+        "summary": "更新协作者权限",
+        "deprecated": false,
+        "description": "更新协作者的权限设置",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "collaboratorId",
+            "in": "path",
+            "description": "协作者ID",
+            "required": true,
+            "example": "3ba8dd43-d8f8-4282-8d77-53dd6226abb4",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "permissions"
+                ],
+                "properties": {
+                  "permissions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": [
+                        "view",
+                        "edit",
+                        "control"
+                      ]
+                    },
+                    "description": "权限列表"
+                  }
+                }
+              },
+              "example": {
+                "permissions": [
+                  "view",
+                  "control"
+                ]
               }
             }
           }
@@ -1206,258 +820,80 @@
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
-        "tags": ["debates"],
-        "summary": "删除辩题",
-        "description": "删除指定辩题",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "debateId",
-            "in": "path",
-            "required": true,
-            "description": "辩题ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "删除成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/debates/{debateId}/status": {
-      "put": {
-        "tags": ["debates"],
-        "summary": "更新辩题状态",
-        "description": "控制辩题的辩论进度状态",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "debateId",
-            "in": "path",
-            "required": true,
-            "description": "辩题ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["status"],
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "enum": ["pending", "ongoing", "final_vote", "ended"],
-                    "description": "辩题状态：待开始/辩论中/最终投票/已结束"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "状态更新成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/debates/reorder": {
-      "put": {
-        "tags": ["debates"],
-        "summary": "调整辩题顺序",
-        "description": "批量调整辩题的排序",
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["debates"],
-                "properties": {
-                  "debates": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "description": "辩题ID"
-                        },
-                        "order": {
-                          "type": "integer",
-                          "description": "新的排序号"
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "排序更新成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/activities/{activityId}/current-debate": {
-      "get": {
-        "tags": ["debates"],
-        "summary": "获取当前辩题",
-        "description": "获取活动当前展示的辩题",
-        "parameters": [
-          {
-            "name": "activityId",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "获取成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/DebateDetail"
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": ["debates"],
-        "summary": "切换当前辩题",
-        "description": "切换活动当前展示的辩题",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "summary": "移除协作者",
+        "deprecated": false,
+        "description": "从活动中移除协作者",
+        "tags": [
+          "activities"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "collaboratorId",
+            "in": "path",
+            "description": "协作者ID",
+            "required": true,
+            "example": "3ba8dd43-d8f8-4282-8d77-53dd6226abb4",
             "schema": {
               "type": "string"
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["debateId"],
-                "properties": {
-                  "debateId": {
-                    "type": "string",
-                    "description": "要切换到的辩题ID"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
-            "description": "切换成功",
+            "description": "移除成功",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/activities/{activityId}/participants": {
       "get": {
-        "tags": ["participants"],
         "summary": "获取参与者列表",
+        "deprecated": false,
         "description": "获取活动的参与者列表",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "tags": [
+          "participants"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1466,6 +902,7 @@
             "name": "page",
             "in": "query",
             "description": "页码",
+            "required": false,
             "schema": {
               "type": "integer",
               "default": 1
@@ -1475,6 +912,7 @@
             "name": "limit",
             "in": "query",
             "description": "每页数量",
+            "required": false,
             "schema": {
               "type": "integer",
               "default": 50
@@ -1484,9 +922,14 @@
             "name": "status",
             "in": "query",
             "description": "参与状态筛选",
+            "required": false,
             "schema": {
               "type": "string",
-              "enum": ["all", "checked_in", "not_checked_in"]
+              "enum": [
+                "all",
+                "checked_in",
+                "not_checked_in"
+              ]
             }
           }
         ],
@@ -1511,32 +954,36 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      },
-      "post": {
-        "tags": ["participants"],
-        "summary": "添加参与者",
-        "description": "手动添加单个参与者",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      },
+      "post": {
+        "summary": "添加参与者",
+        "deprecated": false,
+        "description": "手动添加单个参与者",
+        "tags": [
+          "participants"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -1557,7 +1004,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "201": {
@@ -1580,34 +1028,38 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/activities/{activityId}/participants/batch": {
-      "post": {
-        "tags": ["participants"],
-        "summary": "批量导入参与者",
-        "description": "通过Excel文件批量导入参与者",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/activities/{activityId}/participants/batch": {
+      "post": {
+        "summary": "批量导入参与者",
+        "deprecated": false,
+        "description": "通过Excel文件批量导入参与者",
+        "tags": [
+          "participants"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
@@ -1616,12 +1068,14 @@
                   "file": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Excel文件"
+                    "description": "Excel文件",
+                    "example": ""
                   }
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1665,27 +1119,32 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/activities/{activityId}/participants/export": {
-      "get": {
-        "tags": ["participants"],
-        "summary": "导出参与者数据",
-        "description": "导出参与者列表为Excel文件",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/activities/{activityId}/participants/export": {
+      "get": {
+        "summary": "导出参与者数据",
+        "deprecated": false,
+        "description": "导出参与者列表为Excel文件",
+        "tags": [
+          "participants"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1701,27 +1160,868 @@
                   "format": "binary"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/participants/{participantId}/qrcode": {
-      "get": {
-        "tags": ["participants"],
-        "summary": "生成参与者二维码",
-        "description": "生成参与者的入场二维码",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/activities/{activityId}/current-debate": {
+      "get": {
+        "summary": "获取当前辩题",
+        "deprecated": false,
+        "description": "获取活动当前展示的辩题",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DebateDetail"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "切换当前辩题",
+        "deprecated": false,
+        "description": "切换活动当前展示的辩题",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "debateId"
+                ],
+                "properties": {
+                  "debateId": {
+                    "type": "string",
+                    "description": "要切换到的辩题ID"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "切换成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/activities": {
+      "get": {
+        "summary": "获取活动列表",
+        "deprecated": false,
+        "description": "获取用户创建和参与的活动列表",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页数量",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "活动状态筛选",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "upcoming",
+                "ongoing",
+                "ended"
+              ]
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "用户角色筛选",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "owner",
+                "collaborator"
+              ]
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索关键词",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/PaginatedActivities"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "创建活动",
+        "deprecated": false,
+        "description": "创建新的辩论活动",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "startTime",
+                  "endTime",
+                  "location",
+                  "description"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "活动名称"
+                  },
+                  "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间"
+                  },
+                  "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "结束时间"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "活动地点"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "活动描述"
+                  },
+                  "coverImage": {
+                    "type": "string",
+                    "description": "封面图片URL"
+                  },
+                  "expectedParticipants": {
+                    "type": "integer",
+                    "description": "预计参与人数"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "活动标签"
+                  },
+                  "settings": {
+                    "$ref": "#/components/schemas/ActivitySettings"
+                  }
+                }
+              },
+              "example": {
+                "name": "测试活动",
+                "startTime": "2025-05-30 16:31:32",
+                "endTime": "2026-03-03 18:34:31",
+                "location": "non esse",
+                "description": "运率下局族先被干飞设。制率计放制。的联影收根。和采她光还很个水最技。上要交维安从影更装比。铁必史素标。",
+                "coverImage": "https://loremflickr.com/400/400?lock=7606246920429016",
+                "expectedParticipants": 2,
+                "tags": [
+                  "reprehenderit"
+                ],
+                "settings": {
+                  "allowVoteChange": false,
+                  "maxVoteChanges": 68,
+                  "showRealTimeResults": false,
+                  "requireCheckIn": false,
+                  "anonymousVoting": false,
+                  "autoLockVotes": true,
+                  "lockVoteDelay": 4
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/Activity"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/activities/{activityId}": {
+      "get": {
+        "summary": "获取活动详情",
+        "deprecated": false,
+        "description": "获取指定活动的详细信息",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "9797cc2b-534e-40c2-90d3-1774f5ae756b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ActivityDetail"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "更新活动",
+        "deprecated": false,
+        "description": "更新活动信息",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "9797cc2b-534e-40c2-90d3-1774f5ae756b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "活动名称"
+                  },
+                  "startTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间"
+                  },
+                  "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "结束时间"
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "活动地点"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "活动描述"
+                  },
+                  "coverImage": {
+                    "type": "string",
+                    "description": "封面图片URL"
+                  },
+                  "settings": {
+                    "$ref": "#/components/schemas/ActivitySettings"
+                  }
+                }
+              },
+              "example": {
+                "name": "度芳",
+                "startTime": "2026-05-07 01:03:00",
+                "endTime": "2025-04-22 01:18:09",
+                "location": "reprehenderit dolor ipsum veniam",
+                "description": "在热应把风连向即特存。即矿就原于放气公。手线何日东。",
+                "coverImage": "https://loremflickr.com/400/400?lock=6712221411122313",
+                "settings": {
+                  "allowVoteChange": true,
+                  "maxVoteChanges": 87,
+                  "showRealTimeResults": false,
+                  "requireCheckIn": true,
+                  "anonymousVoting": true,
+                  "autoLockVotes": false,
+                  "lockVoteDelay": 20
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "删除活动",
+        "deprecated": false,
+        "description": "删除指定活动",
+        "tags": [
+          "activities"
+        ],
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "活动ID",
+            "required": true,
+            "example": "9797cc2b-534e-40c2-90d3-1774f5ae756b",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/debates/{debateId}": {
+      "get": {
+        "summary": "获取辩题详情",
+        "deprecated": false,
+        "description": "获取指定辩题的详细信息",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "debateId",
+            "in": "path",
+            "description": "辩题ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DebateDetail"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "更新辩题",
+        "deprecated": false,
+        "description": "更新辩题信息",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "debateId",
+            "in": "path",
+            "description": "辩题ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "辩题标题"
+                  },
+                  "proDescription": {
+                    "type": "string",
+                    "description": "正方观点描述"
+                  },
+                  "conDescription": {
+                    "type": "string",
+                    "description": "反方观点描述"
+                  },
+                  "background": {
+                    "type": "string",
+                    "description": "辩题背景介绍"
+                  },
+                  "estimatedDuration": {
+                    "type": "integer",
+                    "description": "预计辩论时长（分钟）"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "删除辩题",
+        "deprecated": false,
+        "description": "删除指定辩题",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "debateId",
+            "in": "path",
+            "description": "辩题ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/debates/{debateId}/status": {
+      "put": {
+        "summary": "更新辩题状态",
+        "deprecated": false,
+        "description": "控制辩题的辩论进度状态",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [
+          {
+            "name": "debateId",
+            "in": "path",
+            "description": "辩题ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "status"
+                ],
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "ongoing",
+                      "final_vote",
+                      "ended"
+                    ],
+                    "description": "辩题状态：待开始/辩论中/最终投票/已结束"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "状态更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/debates/reorder": {
+      "put": {
+        "summary": "调整辩题顺序",
+        "deprecated": false,
+        "description": "批量调整辩题的排序",
+        "tags": [
+          "debates"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "debates"
+                ],
+                "properties": {
+                  "debates": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "description": "辩题ID"
+                        },
+                        "order": {
+                          "type": "integer",
+                          "description": "新的排序号"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "排序更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/participants/{participantId}/link": {
+      "get": {
+        "summary": "生成参与者链接",
+        "deprecated": false,
+        "description": "生成参与者的投票链接",
+        "tags": [
+          "participants"
         ],
         "parameters": [
           {
             "name": "participantId",
             "in": "path",
-            "required": true,
             "description": "参与者ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "生成成功",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/participants/{participantId}/qrcode": {
+      "get": {
+        "summary": "生成参与者二维码",
+        "deprecated": false,
+        "description": "生成参与者的入场二维码",
+        "tags": [
+          "participants"
+        ],
+        "parameters": [
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "参与者ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1737,23 +2037,35 @@
                   "format": "binary"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/votes/enter": {
       "post": {
-        "tags": ["votes"],
         "summary": "参与者入场",
+        "deprecated": false,
         "description": "参与者通过活动ID和编号进入活动",
+        "tags": [
+          "votes"
+        ],
+        "parameters": [],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["activityId", "participantCode"],
+                "required": [
+                  "activityId",
+                  "participantCode"
+                ],
                 "properties": {
                   "activityId": {
                     "type": "string",
@@ -1770,7 +2082,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1805,7 +2118,8 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "400": {
             "description": "参数错误",
@@ -1815,7 +2129,8 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "404": {
             "description": "活动或参与者不存在",
@@ -1825,34 +2140,46 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/votes/debates/{debateId}": {
       "post": {
-        "tags": ["votes"],
         "summary": "投票",
+        "deprecated": false,
         "description": "参与者对指定辩题进行投票",
+        "tags": [
+          "votes"
+        ],
         "parameters": [
           {
             "name": "debateId",
             "in": "path",
-            "required": true,
             "description": "辩题ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["sessionToken", "position"],
+                "required": [
+                  "sessionToken",
+                  "position"
+                ],
                 "properties": {
                   "sessionToken": {
                     "type": "string",
@@ -1860,13 +2187,18 @@
                   },
                   "position": {
                     "type": "string",
-                    "enum": ["pro", "con", "abstain"],
+                    "enum": [
+                      "pro",
+                      "con",
+                      "abstain"
+                    ],
                     "description": "投票立场：正方/反方/弃权"
                   }
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -1899,7 +2231,8 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           },
           "400": {
             "description": "投票失败",
@@ -1909,20 +2242,30 @@
                   "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       },
       "get": {
-        "tags": ["votes"],
         "summary": "获取投票状态",
+        "deprecated": false,
         "description": "获取参与者在指定辩题的投票状态",
+        "tags": [
+          "votes"
+        ],
         "parameters": [
           {
             "name": "debateId",
             "in": "path",
-            "required": true,
             "description": "辩题ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1930,8 +2273,8 @@
           {
             "name": "sessionToken",
             "in": "query",
-            "required": true,
             "description": "会话令牌",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -1958,22 +2301,32 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/votes/debates/{debateId}/results": {
       "get": {
-        "tags": ["votes"],
         "summary": "获取投票结果",
+        "deprecated": false,
         "description": "获取指定辩题的投票统计结果",
+        "tags": [
+          "votes"
+        ],
         "parameters": [
           {
             "name": "debateId",
             "in": "path",
-            "required": true,
             "description": "辩题ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2000,27 +2353,32 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     },
     "/api/screen/{activityId}/display": {
       "get": {
-        "tags": ["screen"],
         "summary": "获取大屏显示数据",
+        "deprecated": false,
         "description": "获取大屏实时显示的数据",
-        "security": [
-          {
-            "bearerAuth": []
-          }
+        "tags": [
+          "screen"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2029,9 +2387,15 @@
             "name": "type",
             "in": "query",
             "description": "显示类型",
+            "required": false,
             "schema": {
               "type": "string",
-              "enum": ["current_debate", "pro_only", "con_only", "both_sides"],
+              "enum": [
+                "current_debate",
+                "pro_only",
+                "con_only",
+                "both_sides"
+              ],
               "default": "both_sides"
             }
           }
@@ -2057,43 +2421,54 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/screen/{activityId}/control": {
-      "post": {
-        "tags": ["screen"],
-        "summary": "大屏控制",
-        "description": "远程控制大屏显示内容",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/screen/{activityId}/control": {
+      "post": {
+        "summary": "大屏控制",
+        "deprecated": false,
+        "description": "远程控制大屏显示内容",
+        "tags": [
+          "screen"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["action"],
+                "required": [
+                  "action"
+                ],
                 "properties": {
                   "action": {
                     "type": "string",
-                    "enum": ["switch_debate", "change_display_type", "toggle_data", "show_logo"],
+                    "enum": [
+                      "switch_debate",
+                      "change_display_type",
+                      "toggle_data",
+                      "show_logo"
+                    ],
                     "description": "控制动作"
                   },
                   "debateId": {
@@ -2102,7 +2477,12 @@
                   },
                   "displayType": {
                     "type": "string",
-                    "enum": ["current_debate", "pro_only", "con_only", "both_sides"],
+                    "enum": [
+                      "current_debate",
+                      "pro_only",
+                      "con_only",
+                      "both_sides"
+                    ],
                     "description": "显示类型（change_display_type时必需）"
                   },
                   "showData": {
@@ -2112,7 +2492,8 @@
                 }
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -2123,27 +2504,32 @@
                   "$ref": "#/components/schemas/ApiResponse"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/statistics/{activityId}/dashboard": {
-      "get": {
-        "tags": ["statistics"],
-        "summary": "获取实时数据看板",
-        "description": "获取活动的实时统计数据",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/statistics/{activityId}/dashboard": {
+      "get": {
+        "summary": "获取实时数据看板",
+        "deprecated": false,
+        "description": "获取活动的实时统计数据",
+        "tags": [
+          "statistics"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2170,27 +2556,32 @@
                   ]
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/statistics/{activityId}/report": {
-      "get": {
-        "tags": ["statistics"],
-        "summary": "获取活动报告",
-        "description": "获取活动的完整数据报告",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/statistics/{activityId}/report": {
+      "get": {
+        "summary": "获取活动报告",
+        "deprecated": false,
+        "description": "获取活动的完整数据报告",
+        "tags": [
+          "statistics"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2199,9 +2590,14 @@
             "name": "format",
             "in": "query",
             "description": "报告格式",
+            "required": false,
             "schema": {
               "type": "string",
-              "enum": ["json", "pdf", "excel"],
+              "enum": [
+                "json",
+                "pdf",
+                "excel"
+              ],
               "default": "json"
             }
           }
@@ -2226,40 +2622,33 @@
                     }
                   ]
                 }
-              },
-              "application/pdf": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              },
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
               }
-            }
+            },
+            "headers": {}
           }
-        }
-      }
-    },
-    "/api/statistics/{activityId}/export": {
-      "get": {
-        "tags": ["statistics"],
-        "summary": "导出原始数据",
-        "description": "导出活动的原始投票数据",
+        },
         "security": [
           {
             "bearerAuth": []
           }
+        ]
+      }
+    },
+    "/api/statistics/{activityId}/export": {
+      "get": {
+        "summary": "导出原始数据",
+        "deprecated": false,
+        "description": "导出活动的原始投票数据",
+        "tags": [
+          "statistics"
         ],
         "parameters": [
           {
             "name": "activityId",
             "in": "path",
-            "required": true,
             "description": "活动ID",
+            "required": true,
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2268,9 +2657,15 @@
             "name": "type",
             "in": "query",
             "description": "导出数据类型",
+            "required": false,
             "schema": {
               "type": "string",
-              "enum": ["votes", "changes", "timeline", "all"],
+              "enum": [
+                "votes",
+                "changes",
+                "timeline",
+                "all"
+              ],
               "default": "all"
             }
           }
@@ -2285,20 +2680,19 @@
                   "format": "binary"
                 }
               }
-            }
+            },
+            "headers": {}
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },
   "components": {
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
-    },
     "schemas": {
       "ApiResponse": {
         "type": "object",
@@ -2366,7 +2760,10 @@
           },
           "role": {
             "type": "string",
-            "enum": ["admin", "organizer"],
+            "enum": [
+              "admin",
+              "organizer"
+            ],
             "description": "用户角色"
           },
           "createdAt": {
@@ -2443,7 +2840,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["upcoming", "ongoing", "ended"],
+            "enum": [
+              "upcoming",
+              "ongoing",
+              "ended"
+            ],
             "description": "活动状态"
           },
           "expectedParticipants": {
@@ -2601,7 +3002,11 @@
             "type": "array",
             "items": {
               "type": "string",
-              "enum": ["view", "edit", "control"]
+              "enum": [
+                "view",
+                "edit",
+                "control"
+              ]
             },
             "description": "权限列表"
           },
@@ -2617,7 +3022,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "accepted", "declined"],
+            "enum": [
+              "pending",
+              "accepted",
+              "declined"
+            ],
             "description": "邀请状态"
           }
         }
@@ -2651,7 +3060,12 @@
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "ongoing", "final_vote", "ended"],
+            "enum": [
+              "pending",
+              "ongoing",
+              "final_vote",
+              "ended"
+            ],
             "description": "辩题状态"
           },
           "estimatedDuration": {
@@ -2804,7 +3218,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["upcoming", "ongoing", "ended"],
+            "enum": [
+              "upcoming",
+              "ongoing",
+              "ended"
+            ],
             "description": "活动状态"
           },
           "currentDebate": {
@@ -2838,7 +3256,11 @@
           },
           "position": {
             "type": "string",
-            "enum": ["pro", "con", "abstain"],
+            "enum": [
+              "pro",
+              "con",
+              "abstain"
+            ],
             "description": "投票立场"
           },
           "votedAt": {
@@ -2900,7 +3322,11 @@
           },
           "winner": {
             "type": "string",
-            "enum": ["pro", "con", "tie"],
+            "enum": [
+              "pro",
+              "con",
+              "tie"
+            ],
             "description": "获胜方"
           },
           "isLocked": {
@@ -2925,7 +3351,12 @@
           },
           "displayType": {
             "type": "string",
-            "enum": ["current_debate", "pro_only", "con_only", "both_sides"],
+            "enum": [
+              "current_debate",
+              "pro_only",
+              "con_only",
+              "both_sides"
+            ],
             "description": "显示类型"
           },
           "showData": {
@@ -2995,7 +3426,12 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "enum": ["participant_join", "vote_cast", "vote_change", "debate_switch"],
+                  "enum": [
+                    "participant_join",
+                    "vote_cast",
+                    "vote_change",
+                    "debate_switch"
+                  ],
                   "description": "活动类型"
                 },
                 "timestamp": {
@@ -3110,6 +3546,23 @@
           }
         }
       }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
     }
-  }
+  },
+  "servers": [],
+  "security": [
+    {
+      "bearer": []
+    }
+  ]
 }
