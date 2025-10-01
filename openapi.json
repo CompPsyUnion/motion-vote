@@ -254,7 +254,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -344,7 +344,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -375,10 +375,10 @@
                     "description": "头像URL"
                   }
                 }
-              }
+              },
+              "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -395,7 +395,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -466,7 +466,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -485,7 +485,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -521,7 +521,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -538,7 +538,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -673,7 +673,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -690,7 +690,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
             "schema": {
               "type": "string"
             }
@@ -724,10 +724,16 @@
                     "description": "权限列表"
                   }
                 }
+              },
+              "example": {
+                "email": "test2@example.com",
+                "permissions": [
+                  "control",
+                  "view"
+                ]
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "201": {
@@ -744,7 +750,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -826,7 +832,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -960,7 +966,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -1002,10 +1008,10 @@
                     "description": "备注"
                   }
                 }
-              }
+              },
+              "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "201": {
@@ -1034,7 +1040,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1072,10 +1078,10 @@
                     "example": ""
                   }
                 }
-              }
+              },
+              "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1125,7 +1131,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1144,7 +1150,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -1154,7 +1160,7 @@
           "200": {
             "description": "导出成功",
             "content": {
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+              "text/csv": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -1166,7 +1172,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1185,7 +1191,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -1235,7 +1241,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -1255,10 +1261,12 @@
                     "description": "要切换到的辩题ID"
                   }
                 }
+              },
+              "example": {
+                "debateId": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1275,7 +1283,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1373,7 +1381,7 @@
         },
         "security": [
           {
-            "bearer": []
+            "bearerAuth": []
           }
         ]
       },
@@ -1695,7 +1703,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "",
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
             "schema": {
               "type": "string"
             }
@@ -1745,7 +1753,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "",
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
             "schema": {
               "type": "string"
             }
@@ -1778,10 +1786,16 @@
                     "description": "预计辩论时长（分钟）"
                   }
                 }
+              },
+              "example": {
+                "title": "假设干脆哇哦一齐",
+                "proDescription": "力天决这在放术。带点性目。克相基今位人老包学别。求值加器。院度离位始据六县。白界率华增后参。住再级难。",
+                "conDescription": "表满布们管张眼高精候。集开步步族主农织器土。现看用林。金拉少统人力种京。量矿然了少研种划王。确任后调斯合青究。",
+                "background": "veniam incididunt ea",
+                "estimatedDuration": 40
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1836,7 +1850,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1855,7 +1869,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "",
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
             "schema": {
               "type": "string"
             }
@@ -1881,10 +1895,12 @@
                     "description": "辩题状态：待开始/辩论中/最终投票/已结束"
                   }
                 }
+              },
+              "example": {
+                "status": "ongoing"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1901,7 +1917,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -1941,10 +1957,10 @@
                     }
                   }
                 }
-              }
+              },
+              "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -1961,89 +1977,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/api/participants/{participantId}/link": {
-      "get": {
-        "summary": "生成参与者链接",
-        "deprecated": false,
-        "description": "生成参与者的投票链接",
-        "tags": [
-          "participants"
-        ],
-        "parameters": [
-          {
-            "name": "participantId",
-            "in": "path",
-            "description": "参与者ID",
-            "required": true,
-            "example": "",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "生成成功",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/api/participants/{participantId}/qrcode": {
-      "get": {
-        "summary": "生成参与者二维码",
-        "deprecated": false,
-        "description": "生成参与者的入场二维码",
-        "tags": [
-          "participants"
-        ],
-        "parameters": [
-          {
-            "name": "participantId",
-            "in": "path",
-            "description": "参与者ID",
-            "required": true,
-            "example": "",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "生成成功",
-            "content": {
-              "image/png": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            },
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2364,6 +2298,191 @@
         ]
       }
     },
+    "/api/participants/{participantId}/link": {
+      "get": {
+        "summary": "生成参与者链接",
+        "deprecated": false,
+        "description": "生成参与者的投票链接",
+        "tags": [
+          "participants"
+        ],
+        "parameters": [
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "参与者ID",
+            "required": true,
+            "example": "ac6ee087-3e8c-4d1b-b9ad-fabc7910655f",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "生成成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "activityId": {
+                                "type": "string"
+                              },
+                              "code": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "phone": {
+                                "type": "string"
+                              },
+                              "note": {
+                                "type": "string"
+                              },
+                              "checkedIn": {
+                                "type": "boolean"
+                              },
+                              "checkedInAt": {
+                                "type": "string"
+                              },
+                              "deviceFingerprint": {
+                                "type": "string"
+                              },
+                              "createdAt": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "total": {
+                          "type": "integer"
+                        },
+                        "page": {
+                          "type": "integer"
+                        },
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "totalPages": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "items",
+                        "total",
+                        "page",
+                        "limit",
+                        "totalPages"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "timestamp",
+                    "data"
+                  ]
+                },
+                "example": {
+                  "success": true,
+                  "message": "string",
+                  "timestamp": "2019-08-24T14:15:22.123Z",
+                  "data": {
+                    "items": [
+                      {
+                        "id": "string",
+                        "activityId": "string",
+                        "code": "string",
+                        "name": "string",
+                        "phone": "string",
+                        "note": "string",
+                        "checkedIn": true,
+                        "checkedInAt": "2019-08-24T14:15:22.123Z",
+                        "deviceFingerprint": "string",
+                        "createdAt": "2019-08-24T14:15:22.123Z"
+                      }
+                    ],
+                    "total": 0,
+                    "page": 0,
+                    "limit": 0,
+                    "totalPages": 0
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/participants/{participantId}/qrcode": {
+      "get": {
+        "summary": "（弃用）生成参与者二维码",
+        "deprecated": false,
+        "description": "生成参与者的入场二维码",
+        "tags": [
+          "participants"
+        ],
+        "parameters": [
+          {
+            "name": "participantId",
+            "in": "path",
+            "description": "参与者ID",
+            "required": true,
+            "example": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "生成成功",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/api/screen/{activityId}/display": {
       "get": {
         "summary": "获取大屏显示数据",
@@ -2427,7 +2546,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2490,10 +2609,10 @@
                     "description": "是否显示数据（toggle_data时必需）"
                   }
                 }
-              }
+              },
+              "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2510,7 +2629,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2529,7 +2648,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
             "schema": {
               "type": "string"
             }
@@ -2562,7 +2681,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2629,7 +2748,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2674,7 +2793,7 @@
           "200": {
             "description": "导出成功",
             "content": {
-              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+              "text/csv": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
@@ -2686,7 +2805,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -3549,9 +3668,9 @@
     },
     "securitySchemes": {
       "bearerAuth": {
+        "bearerFormat": "JWT",
         "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "scheme": "bearer"
       },
       "bearer": {
         "type": "http",
