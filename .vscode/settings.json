@@ -53,6 +53,7 @@
     "Scrapy",
     "sdist",
     "sessionmaker",
+    "smtogo",
     "spreadsheetml",
     "Spyder",
     "spyderproject",
