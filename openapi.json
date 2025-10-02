@@ -1,5 +1,5 @@
 {
-  "openapi": "3.1.0",
+  "openapi": "3.0.1",
   "info": {
     "title": "Motion Vote Api",
     "description": "辩论活动实时投票互动系统 - 后端API接口文档\n\n本系统为辩论赛事提供完整的实时投票互动解决方案，支持活动组织者高效管理辩论赛事，为现场观众提供便捷的投票互动体验，并通过大屏实时展示投票数据。\n\n## 核心功能模块\n- 用户管理：注册登录、权限控制\n- 活动管理：创建活动、协作管理、参与者管理\n- 辩题管理：创建辩题、状态控制、实时切换\n- 投票系统：参与者入场、投票改票、结果锁定\n- 大屏展示：实时数据展示、主题控制\n- 数据统计：实时看板、活动报告、数据导出\n\n## 认证方式\n- JWT Token认证\n- 参与者通过活动ID+编号验证\n\n## 实时通信\n- WebSocket支持实时数据推送\n- 支持投票更新、辩题切换、状态变更等事件",
@@ -110,13 +110,9 @@
                 "required": [
                   "email",
                   "password",
-<<<<<<< HEAD
-                  "name"
-=======
                   "name",
                   "code",
                   "session"
->>>>>>> a57f8f7 (docs: 更新API文档)
                 ],
                 "properties": {
                   "email": {
@@ -349,13 +345,9 @@
               "schema": {
                 "type": "object",
                 "required": [
-<<<<<<< HEAD
-                  "email"
-=======
                   "email",
                   "code",
                   "session"
->>>>>>> a57f8f7 (docs: 更新API文档)
                 ],
                 "properties": {
                   "email": {
@@ -375,8 +367,7 @@
               },
               "examples": {}
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -466,12 +457,9 @@
                   },
                   "role": {
                     "type": "string",
-                    "examples": [
-                      "admin",
-                      "organizer"
-                    ],
                     "default": "organizer",
-                    "description": "用户角色"
+                    "description": "用户角色",
+                    "example": "admin"
                   }
                 }
               },
@@ -998,11 +986,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -1086,11 +1070,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -1116,15 +1096,11 @@
                   }
                 }
               },
-<<<<<<< HEAD
-              "examples": {}
-=======
               "example": {
                 "name": "管建国",
                 "phone": "097 5786 4126",
                 "note": "ipsum"
               }
->>>>>>> a57f8f7 (docs: 更新API文档)
             }
           }
         },
@@ -2073,9 +2049,6 @@
                   }
                 }
               },
-<<<<<<< HEAD
-              "examples": {}
-=======
               "example": {
                 "debates": [
                   {
@@ -2088,7 +2061,6 @@
                   }
                 ]
               }
->>>>>>> a57f8f7 (docs: 更新API文档)
             }
           }
         },
@@ -2151,8 +2123,7 @@
                 "deviceFingerprint": ""
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2234,11 +2205,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2274,8 +2241,7 @@
                 "position": "pro"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
@@ -2342,11 +2308,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2356,10 +2318,7 @@
             "in": "query",
             "description": "会话令牌",
             "required": true,
-<<<<<<< HEAD
-=======
             "example": "dae78ce6-acd8-4624-886b-72472608823e",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2422,11 +2381,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2866,11 +2821,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2880,10 +2831,7 @@
             "in": "query",
             "description": "报告格式",
             "required": false,
-<<<<<<< HEAD
-=======
             "example": "json",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string",
               "enum": [
@@ -2941,11 +2889,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-<<<<<<< HEAD
-            "example": "",
-=======
             "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2955,10 +2899,7 @@
             "in": "query",
             "description": "导出数据类型",
             "required": false,
-<<<<<<< HEAD
-=======
             "example": "all",
->>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string",
               "enum": [
@@ -2983,10 +2924,6 @@
               }
             },
             "headers": {}
-<<<<<<< HEAD
-          }
-        },
-=======
           }
         },
         "security": [
@@ -3098,7 +3035,6 @@
             "headers": {}
           }
         },
->>>>>>> a57f8f7 (docs: 更新API文档)
         "security": [
           {
             "bearer": []
@@ -3107,7 +3043,6 @@
       }
     }
   },
-  "webhooks": {},
   "components": {
     "schemas": {
       "SiteInfo": {
@@ -3167,9 +3102,7 @@
         "properties": {
           "success": {
             "type": "boolean",
-            "examples": [
-              false
-            ]
+            "example": false
           },
           "message": {
             "type": "string",
