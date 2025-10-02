@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
     "title": "Motion Vote Api",
     "description": "辩论活动实时投票互动系统 - 后端API接口文档\n\n本系统为辩论赛事提供完整的实时投票互动解决方案，支持活动组织者高效管理辩论赛事，为现场观众提供便捷的投票互动体验，并通过大屏实时展示投票数据。\n\n## 核心功能模块\n- 用户管理：注册登录、权限控制\n- 活动管理：创建活动、协作管理、参与者管理\n- 辩题管理：创建辩题、状态控制、实时切换\n- 投票系统：参与者入场、投票改票、结果锁定\n- 大屏展示：实时数据展示、主题控制\n- 数据统计：实时看板、活动报告、数据导出\n\n## 认证方式\n- JWT Token认证\n- 参与者通过活动ID+编号验证\n\n## 实时通信\n- WebSocket支持实时数据推送\n- 支持投票更新、辩题切换、状态变更等事件",
@@ -32,6 +32,67 @@
     }
   ],
   "paths": {
+    "/auth/getcode": {
+      "get": {
+        "summary": "获取验证码",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "请求是否成功"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "响应消息"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "响应时间戳"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "session": {
+                          "type": "string",
+                          "description": "验证码对应的有效sessionid，用于验证验证码用途"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/api/auth/register": {
       "post": {
         "summary": "用户注册",
@@ -49,7 +110,13 @@
                 "required": [
                   "email",
                   "password",
+<<<<<<< HEAD
                   "name"
+=======
+                  "name",
+                  "code",
+                  "session"
+>>>>>>> a57f8f7 (docs: 更新API文档)
                 ],
                 "properties": {
                   "email": {
@@ -69,6 +136,14 @@
                   "phone": {
                     "type": "string",
                     "description": "手机号（可选）"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "邮箱验证码"
+                  },
+                  "session": {
+                    "type": "string",
+                    "description": "邮箱验证码session"
                   }
                 }
               },
@@ -274,16 +349,31 @@
               "schema": {
                 "type": "object",
                 "required": [
+<<<<<<< HEAD
                   "email"
+=======
+                  "email",
+                  "code",
+                  "session"
+>>>>>>> a57f8f7 (docs: 更新API文档)
                 ],
                 "properties": {
                   "email": {
                     "type": "string",
                     "format": "email",
                     "description": "邮箱地址"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "邮箱验证码"
+                  },
+                  "session": {
+                    "type": "string",
+                    "description": "邮箱验证码session"
                   }
                 }
-              }
+              },
+              "examples": {}
             }
           },
           "required": true
@@ -373,6 +463,15 @@
                   "avatar": {
                     "type": "string",
                     "description": "头像URL"
+                  },
+                  "role": {
+                    "type": "string",
+                    "examples": [
+                      "admin",
+                      "organizer"
+                    ],
+                    "default": "organizer",
+                    "description": "用户角色"
                   }
                 }
               },
@@ -899,7 +998,11 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -983,7 +1086,11 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -1009,7 +1116,15 @@
                   }
                 }
               },
+<<<<<<< HEAD
               "examples": {}
+=======
+              "example": {
+                "name": "管建国",
+                "phone": "097 5786 4126",
+                "note": "ipsum"
+              }
+>>>>>>> a57f8f7 (docs: 更新API文档)
             }
           }
         },
@@ -1958,7 +2073,22 @@
                   }
                 }
               },
+<<<<<<< HEAD
               "examples": {}
+=======
+              "example": {
+                "debates": [
+                  {
+                    "id": "62",
+                    "order": 84
+                  },
+                  {
+                    "id": "57",
+                    "order": 17
+                  }
+                ]
+              }
+>>>>>>> a57f8f7 (docs: 更新API文档)
             }
           }
         },
@@ -2014,6 +2144,11 @@
                     "description": "设备指纹"
                   }
                 }
+              },
+              "example": {
+                "activityId": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+                "participantCode": "0001",
+                "deviceFingerprint": ""
               }
             }
           },
@@ -2099,7 +2234,11 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2129,6 +2268,10 @@
                     "description": "投票立场：正方/反方/弃权"
                   }
                 }
+              },
+              "example": {
+                "sessionToken": "dae78ce6-acd8-4624-886b-72472608823e",
+                "position": "pro"
               }
             }
           },
@@ -2199,7 +2342,11 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2209,11 +2356,26 @@
             "in": "query",
             "description": "会话令牌",
             "required": true,
+<<<<<<< HEAD
+=======
+            "example": "dae78ce6-acd8-4624-886b-72472608823e",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "获取成功",
@@ -2260,7 +2422,11 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2700,7 +2866,11 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2710,6 +2880,10 @@
             "in": "query",
             "description": "报告格式",
             "required": false,
+<<<<<<< HEAD
+=======
+            "example": "json",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string",
               "enum": [
@@ -2767,7 +2941,11 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
+<<<<<<< HEAD
             "example": "",
+=======
+            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string"
             }
@@ -2777,6 +2955,10 @@
             "in": "query",
             "description": "导出数据类型",
             "required": false,
+<<<<<<< HEAD
+=======
+            "example": "all",
+>>>>>>> a57f8f7 (docs: 更新API文档)
             "schema": {
               "type": "string",
               "enum": [
@@ -2801,6 +2983,10 @@
               }
             },
             "headers": {}
+<<<<<<< HEAD
+          }
+        },
+=======
           }
         },
         "security": [
@@ -2809,10 +2995,155 @@
           }
         ]
       }
+    },
+    "/info": {
+      "get": {
+        "summary": "获取站点信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "更新站点信息",
+        "deprecated": false,
+        "description": "",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "站点名称 / 标题"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "描述"
+                  },
+                  "openRegister": {
+                    "type": "boolean",
+                    "description": "开放注册"
+                  },
+                  "icon": {
+                    "type": "string",
+                    "description": "图标",
+                    "format": "uri"
+                  },
+                  "contact": {
+                    "type": "string",
+                    "description": "联系方式跳转链接"
+                  },
+                  "icp": {
+                    "type": "string",
+                    "description": "ICP 备案号"
+                  },
+                  "footerText": {
+                    "type": "string",
+                    "description": "脚部文本"
+                  }
+                }
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "请求是否成功"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "响应消息"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "响应时间戳"
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+>>>>>>> a57f8f7 (docs: 更新API文档)
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
     }
   },
+  "webhooks": {},
   "components": {
     "schemas": {
+      "SiteInfo": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "站点名称 / 标题"
+          },
+          "description": {
+            "type": "string",
+            "description": "描述"
+          },
+          "openRegister": {
+            "type": "boolean",
+            "description": "开放注册"
+          },
+          "icon": {
+            "type": "string",
+            "description": "图标",
+            "format": "uri"
+          },
+          "contact": {
+            "type": "string",
+            "description": "联系方式跳转链接"
+          },
+          "icp": {
+            "type": "string",
+            "description": "ICP 备案号"
+          },
+          "footerText": {
+            "type": "string",
+            "description": "脚部文本"
+          }
+        }
+      },
       "ApiResponse": {
         "type": "object",
         "properties": {
@@ -2836,7 +3167,9 @@
         "properties": {
           "success": {
             "type": "boolean",
-            "example": false
+            "examples": [
+              false
+            ]
           },
           "message": {
             "type": "string",
