@@ -7,9 +7,9 @@
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-**A complete real-time voting solution designed for debate competitions**
+## **A complete real-time voting solution designed for debate competitions**
 
-[Features](#features) • [Quick Start](#quick-start) • [Architecture](#architecture) • [Docs](#docs) • [Contributing](#contributing)
+[Features](#-features) • [Quick Start](#-quick-start) • [Architecture](#️-architecture) • [Docs](#api-docs) • [Contributing](#-contributing)
 
 </div>
 
@@ -32,18 +32,21 @@ Motion Vote is a comprehensive solution tailored for debate events, aiming to pr
 ## ✨ Features
 
 ### 🎪 Event Management
+
 - **Event Creation & Configuration** - Create debate events, configure info, time, location, etc.
 - **Collaboration Management** - Invite multiple users to co-manage events, with fine-grained permissions
 - **Participant Management** - Bulk import participants, generate personalized ticket QR codes
 - **Event Settings** - Flexible rules for vote changing, data display, big screen themes, etc.
 
 ### 🎭 Motion Management
+
 - **Motion Creation** - Add multiple motions to events, support for pro/con descriptions
 - **Status Control** - Real-time control of motion status (Not Started/In Progress/Final Vote/Ended)
 - **One-click Switch** - Quickly switch current motion in admin, big screen syncs instantly
 - **Flexible Sorting** - Drag-and-drop to reorder motions
 
 ### 🗳️ Voting System
+
 - **Quick Entry** - Enter event by scanning ticket QR or entering code
 - **Initial Voting** - Vote for side (Pro/Con/Abstain) before debate starts
 - **Real-time Vote Change** - Change side anytime during debate, with full change history
@@ -51,6 +54,7 @@ Motion Vote is a comprehensive solution tailored for debate events, aiming to pr
 - **Anti-cheating** - IP rate limiting, device fingerprinting, abnormal behavior monitoring
 
 ### 📺 Big Screen Display
+
 - **Real-time Data Update** - WebSocket push, latency <1s
 - **Multiple Display Modes** - Show current motion, pro/con status, comparison, etc.
 - **Rich Visualization** - Vote counts, percentages, change flows, trend charts
@@ -58,6 +62,7 @@ Motion Vote is a comprehensive solution tailored for debate events, aiming to pr
 - **Remote Control** - Admin can remotely control big screen content
 
 ### 📊 Data Analytics
+
 - **Real-time Dashboard** - View online users, vote stats, participant activity
 - **Event Reports** - Auto-generate full data analysis reports
 - **Data Export** - Export PDF reports, Excel details
@@ -68,20 +73,23 @@ Motion Vote is a comprehensive solution tailored for debate events, aiming to pr
 
 ### Tech Stack
 
-**Frontend**
+#### **Frontend**
+
 - Vue 3 + TypeScript - Modern frontend framework
 - ECharts - Data visualization
 - Pinia - State management
 - Socket.io-client - Real-time WebSocket communication
 
-**Backend**
+#### **Backend**
+
 - Python + FastAPI - Web framework
 - MySQL 8.0 - Relational database
 - Redis - Cache & session management
 - Socket.io / WebSocket - Real-time data push
 - JWT - Authentication & authorization
 
-**Deployment & Ops**
+#### **Deployment & Ops**
+
 - Docker - Containerized deployment
 - Nginx - Reverse proxy & load balancing
 
@@ -125,7 +133,7 @@ To be completed (WIP)
 ```bash
 # Start backend service
 cd backend
-python main.py 
+python main.py
 
 # Start frontend service
 cd frontend
@@ -151,17 +159,21 @@ docker-compose logs -f
 
 ### Core Concepts
 
-**System Roles**
+#### **System Roles**
+
 - **System Admin** - Manages all users and system settings
 - **Event Organizer** - Creates and manages debate events
 - **Co-admin** - Assists organizer in event management
 - **Audience** - No registration, join and vote via QR code
 - **Big Screen** - Real-time vote data display
 
-**Motion Status Flow**
-```
-Not Started → In Progress → Final Vote → Ended
-```
+#### **Motion Status Flow**
+
+```mermaid
+flowchart LR
+    A[Not Started] --> B[In Progress]
+    B --> C[Final Vote]
+    C --> D[Ended]
 
 ### API Docs
 
@@ -171,12 +183,12 @@ API documentation is in progress.
 
 **Event Config Options**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `allowChangeVote` | Allow vote changing | true |
-| `maxChangeCount` | Max vote changes | 3 |
-| `showRealTimePercent` | Show real-time percentage | true |
-| `screenTheme` | Big screen theme | classic |
+| Option                | Description               | Default |
+| --------------------- | ------------------------- | ------- |
+| `allowChangeVote`     | Allow vote changing       | true    |
+| `maxChangeCount`      | Max vote changes          | 3       |
+| `showRealTimePercent` | Show real-time percentage | true    |
+| `screenTheme`         | Big screen theme          | classic |
 
 ---
 
@@ -276,7 +288,7 @@ We welcome all forms of contribution! Please read the following guidelines befor
 
 ### Commit Message Convention
 
-```
+```text
 <type>(<scope>): <subject>
 
 <body>
@@ -284,7 +296,8 @@ We welcome all forms of contribution! Please read the following guidelines befor
 <footer>
 ```
 
-**Type options**
+#### **Type options**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation update
@@ -298,6 +311,7 @@ We welcome all forms of contribution! Please read the following guidelines befor
 If you find bugs or have feature suggestions, please [submit an Issue](https://github.com/comppsyunion/motion-vote/issues).
 
 When submitting an Issue, please include:
+
 - Detailed description of the problem
 - Steps to reproduce
 - Expected behavior
@@ -324,6 +338,7 @@ This project is licensed under the [Apache License 2.0](LICENSE).
 Thanks to all developers who contributed to this project!
 
 Special thanks to these open source projects:
+
 - [Vue.js](https://vuejs.org/)
 - [ECharts](https://echarts.apache.org/)
 - [Socket.io](https://socket.io/)
@@ -332,8 +347,8 @@ Special thanks to these open source projects:
 
 ## 📧 Contact Us
 
-- **Team Email**: computerpsychounion@nottingham.edu.cn
-- **Developer Email**: Buduan buduan461@gmail.com; Robert He hnrobert@qq.com
+- **Team Email**: <computerpsychounion@nottingham.edu.cn>
+- **Developer Email**: Buduan <buduan461@gmail.com>; Robert He <hnrobert@qq.com>
 
 ---
 

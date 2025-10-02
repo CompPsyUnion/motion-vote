@@ -4,6 +4,8 @@
     "analyzer",
     "aute",
     "autoflush",
+    "behavior",
+    "buduan",
     "celerybeat",
     "checkin",
     "codz",
@@ -47,6 +49,8 @@
     "pypackages",
     "pypirc",
     "pytest",
+    "PYTHONPATH",
+    "PYTHONUNBUFFERED",
     "pytype",
     "qrcode",
     "qrcodes",
@@ -73,7 +77,8 @@
     "vitepress",
     "vuepress",
     "webassets",
-    "wscript"
+    "wscript",
+    "yourdomain"
   ],
   "github.copilot.advanced": {
     "commitMessage": {
