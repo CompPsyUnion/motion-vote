@@ -9,7 +9,7 @@
 
 ## **A complete real-time voting solution designed for debate competitions**
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Architecture](#️-architecture) • [Docs](#api-docs) • [Contributing](#-contributing)
+[Features](#-features) • [Quick Start](#-quick-start) • [Architecture](#️-architecture) • [Docs](#core-concepts) • [Contributing](#-contributing)
 
 </div>
 
@@ -190,6 +190,9 @@ API documentation is in progress.
 | `showRealTimePercent` | Show real-time percentage | true    |
 | `screenTheme`         | Big screen theme          | classic |
 
+### About Admin
+
+The first registered user is the admin with all permissions. Admins can assign admin roles to other users.
 ---
 
 ## 🔐 Security
