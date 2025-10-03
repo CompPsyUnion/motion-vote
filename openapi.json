@@ -32,7 +32,7 @@
     }
   ],
   "paths": {
-    "/auth/getcode": {
+    "/api/auth/getcode": {
       "get": {
         "summary": "获取验证码",
         "deprecated": false,
@@ -2933,7 +2933,7 @@
         ]
       }
     },
-    "/info": {
+    "/api/info": {
       "get": {
         "summary": "获取站点信息",
         "deprecated": false,
@@ -2947,7 +2947,52 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {}
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "description": "站点名称 / 标题"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "描述"
+                        },
+                        "openRegister": {
+                          "type": "boolean",
+                          "description": "开放注册"
+                        },
+                        "icon": {
+                          "type": "string",
+                          "description": "图标",
+                          "format": "uri"
+                        },
+                        "contact": {
+                          "type": "string",
+                          "description": "联系方式跳转链接"
+                        },
+                        "icp": {
+                          "type": "string",
+                          "description": "ICP 备案号"
+                        },
+                        "footerText": {
+                          "type": "string",
+                          "description": "脚部文本"
+                        }
+                      }
+                    }
+                  }
                 }
               }
             },
@@ -3733,16 +3778,6 @@
           },
           "currentDebate": {
             "$ref": "#/components/schemas/DebateDetail"
-          },
-          "displayType": {
-            "type": "string",
-            "enum": [
-              "current_debate",
-              "pro_only",
-              "con_only",
-              "both_sides"
-            ],
-            "description": "显示类型"
           },
           "showData": {
             "type": "boolean",
