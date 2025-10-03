@@ -142,6 +142,45 @@ pnpm dev
 
 ### Docker 快速部署
 
+#### 配置环境变量和 SMToGo 相关
+
+在与 `docker-compose.yml` 文件同级目录下创建一个 `config` 目录，并添加一个 `smtp_config.jsonc` 文件，内容如下：
+
+```jsonc
+// 根据需要修改以下配置
+{
+    // API Configuration
+    "api_key": "", // API key for authentication (leave empty to disable)
+    "api_name": "High-Performance SMTP API", // API name
+    "api_description": "SMTP API mail dispatch with support for attachments.", // API description
+    // SMTP Server Settings
+    "smtp_server": "maildev.com", // SMTP server hostname (for docker: service name)
+    "smtp_port": 1025, // SMTP port
+    "use_ssl": false, // Use SSL/TLS encryption
+    "use_password": false, // Whether to authenticate with username/password
+    "use_tls": false, // Use STARTTLS
+    // Email Limits
+    "max_len_recipient_email": 64, // Maximum length for recipient email
+    "max_len_subject": 255, // Maximum subject length
+    "max_len_body": 50000, // Maximum email body length
+    // Sender Configuration
+    "sender_email": "your_email@example.com", // SMTP authentication email (actual account)
+    "sender_email_display": "", // From header display email (leave empty to use sender_email)
+    "sender_domain": "devel.local.email",
+    "sender_password": "your_password"
+}
+```
+
+以及一个 `data` 目录用于存放 smtogo 日志文件。
+
+在 `docker-compose.yml` 中配置数据库和 Redis 连接信息（如果需要）。
+
+```yaml
+    environment:
+      - DATABASE_URL=postgresql://postgres-url:your-password@motion-vote-db:5432/motionvote
+      - REDIS_URL=redis://motion-vote-redis:6379/0
+```
+
 ```bash
 # 构建并启动所有服务
 docker-compose up -d

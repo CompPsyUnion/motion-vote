@@ -142,6 +142,45 @@ pnpm dev
 
 ### Docker Quick Deploy
 
+#### Configure Environment Variables and SMToGo Config
+
+Create a `config` directory at the same level with `docker-compose.yml` file and add a `smtp_config.jsonc` file with the following content:
+
+```jsonc
+// Modify the following configuration according to your SMTP server settings
+{
+    // API Configuration
+    "api_key": "", // API key for authentication (leave empty to disable)
+    "api_name": "High-Performance SMTP API", // API name
+    "api_description": "SMTP API mail dispatch with support for attachments.", // API description
+    // SMTP Server Settings
+    "smtp_server": "maildev.com", // SMTP server hostname (for docker: service name)
+    "smtp_port": 1025, // SMTP port
+    "use_ssl": false, // Use SSL/TLS encryption
+    "use_password": false, // Whether to authenticate with username/password
+    "use_tls": false, // Use STARTTLS
+    // Email Limits
+    "max_len_recipient_email": 64, // Maximum length for recipient email
+    "max_len_subject": 255, // Maximum subject length
+    "max_len_body": 50000, // Maximum email body length
+    // Sender Configuration
+    "sender_email": "your_email@example.com", // SMTP authentication email (actual account)
+    "sender_email_display": "", // From header display email (leave empty to use sender_email)
+    "sender_domain": "devel.local.email",
+    "sender_password": "your_password"
+}
+```
+
+And another directory `data` for smtogo log files.
+
+Configure db and redis connection in `docker-compose.yml` if needed.
+
+```yaml
+    environment:
+      - DATABASE_URL=postgresql://postgres-url:your-password@motion-vote-db:5432/motionvote
+      - REDIS_URL=redis://motion-vote-redis:6379/0
+```
+
 ```bash
 # Build and start all services
 docker-compose up -d
