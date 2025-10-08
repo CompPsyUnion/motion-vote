@@ -2703,31 +2703,23 @@
                 "properties": {
                   "action": {
                     "type": "string",
+                    "description": "控制动作",
                     "enum": [
                       "switch_debate",
-                      "change_display_type",
                       "toggle_data",
-                      "show_logo"
-                    ],
-                    "description": "控制动作"
+                      "show_cover",
+                      "toggle_timer",
+                      "start_timer",
+                      "pause_timer",
+                      "next_session",
+                      "past_session",
+                      "start_debate",
+                      "end_debate"
+                    ]
                   },
                   "debateId": {
                     "type": "string",
                     "description": "辩题ID（switch_debate时必需）"
-                  },
-                  "displayType": {
-                    "type": "string",
-                    "enum": [
-                      "current_debate",
-                      "pro_only",
-                      "con_only",
-                      "both_sides"
-                    ],
-                    "description": "显示类型（change_display_type时必需）"
-                  },
-                  "showData": {
-                    "type": "boolean",
-                    "description": "是否显示数据（toggle_data时必需）"
                   }
                 }
               },
@@ -3727,13 +3719,37 @@
             "type": "integer",
             "description": "正方票数"
           },
+          "proPreviousVotes": {
+            "type": "integer",
+            "description": "正方初始票数"
+          },
+          "proSwingVotes": {
+            "type": "integer",
+            "title": "正方跑票数",
+            "description": "正方跑票数"
+          },
           "conVotes": {
             "type": "integer",
             "description": "反方票数"
           },
+          "conPreviousVotes": {
+            "type": "integer",
+            "description": "反方初始票数"
+          },
+          "conSwingVotes": {
+            "type": "integer",
+            "title": "反方跑票数"
+          },
           "abstainVotes": {
             "type": "integer",
             "description": "弃权票数"
+          },
+          "abstainPreviousVotes": {
+            "type": "integer"
+          },
+          "abstainSwingVotes": {
+            "type": "integer",
+            "title": "中立跑票数"
           },
           "proPercentage": {
             "type": "number",
@@ -3768,7 +3784,10 @@
             "format": "date-time",
             "description": "锁定时间"
           }
-        }
+        },
+        "required": [
+          "abstainSwingVotes"
+        ]
       },
       "ScreenDisplayData": {
         "type": "object",
