@@ -49,7 +49,7 @@ Motion Vote is a comprehensive solution tailored for debate events, aiming to pr
 
 - **Quick Entry** - Enter event by scanning ticket QR or entering code
 - **Initial Voting** - Vote for side (Pro/Con/Abstain) before debate starts
-- **Real-time Vote Change** - Change side anytime during debate, with full change history
+- **Real-time Vote Change** - Change side vanytime during debate, with full change history
 - **Vote Locking** - Results auto-locked after motion ends, preventing tampering
 - **Anti-cheating** - IP rate limiting, device fingerprinting, abnormal behavior monitoring
 
@@ -213,6 +213,7 @@ flowchart LR
     A[Not Started] --> B[In Progress]
     B --> C[Final Vote]
     C --> D[Ended]
+```
 
 ### API Docs
 
