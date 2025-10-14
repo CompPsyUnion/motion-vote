@@ -3717,49 +3717,53 @@
           },
           "proVotes": {
             "type": "integer",
-            "description": "正方票数"
+            "description": "正方最终票数"
           },
           "proPreviousVotes": {
             "type": "integer",
             "description": "正方初始票数"
           },
-          "proSwingVotes": {
+          "proToConVotes": {
             "type": "integer",
-            "title": "正方跑票数",
-            "description": "正方跑票数"
+            "description": "正方到反方票数"
           },
           "conVotes": {
             "type": "integer",
-            "description": "反方票数"
+            "description": "反方最终票数"
           },
           "conPreviousVotes": {
             "type": "integer",
             "description": "反方初始票数"
           },
-          "conSwingVotes": {
+          "conToProVotes": {
             "type": "integer",
-            "title": "反方跑票数"
+            "description": "反方到正方票数"
           },
           "abstainVotes": {
             "type": "integer",
-            "description": "弃权票数"
+            "description": "中立最终票数"
           },
           "abstainPreviousVotes": {
-            "type": "integer"
-          },
-          "abstainSwingVotes": {
             "type": "integer",
-            "title": "中立跑票数"
+            "description": "中立初始票数"
           },
-          "proPercentage": {
+          "abstainToProVotes": {
+            "type": "integer",
+            "description": "中立到正方票数"
+          },
+          "abstainToConVotes": {
+            "type": "integer",
+            "description": "中立到反方票数"
+          },
+          "proScore": {
             "type": "number",
             "format": "float",
-            "description": "正方得票率"
+            "description": "正方分数"
           },
-          "conPercentage": {
+          "conScore": {
             "type": "number",
             "format": "float",
-            "description": "反方得票率"
+            "description": "反方分数"
           },
           "abstainPercentage": {
             "type": "number",
@@ -3784,10 +3788,7 @@
             "format": "date-time",
             "description": "锁定时间"
           }
-        },
-        "required": [
-          "abstainSwingVotes"
-        ]
+        }
       },
       "ScreenDisplayData": {
         "type": "object",
