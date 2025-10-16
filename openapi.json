@@ -292,6 +292,17 @@
           "auth"
         ],
         "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "刷新成功",
@@ -330,11 +341,53 @@
         ]
       }
     },
+    "/api/auth/revoke": {
+      "post": {
+        "summary": "注销Token",
+        "deprecated": false,
+        "description": "注销token（登出）",
+        "tags": [],
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              },
+              "examples": {}
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
     "/api/auth/forgot-password": {
       "post": {
         "summary": "忘记密码",
         "deprecated": false,
-        "description": "发送密码重置邮件",
+        "description": "重置密码请求",
         "tags": [
           "auth"
         ],
@@ -347,7 +400,8 @@
                 "required": [
                   "email",
                   "code",
-                  "session"
+                  "session",
+                  "newPassword"
                 ],
                 "properties": {
                   "email": {
@@ -358,6 +412,10 @@
                   "code": {
                     "type": "string",
                     "description": "邮箱验证码"
+                  },
+                  "newPassword": {
+                    "type": "string",
+                    "description": "新密码"
                   },
                   "session": {
                     "type": "string",
