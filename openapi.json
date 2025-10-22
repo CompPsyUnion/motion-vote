@@ -42,8 +42,9 @@
           {
             "name": "email",
             "in": "query",
-            "description": "",
+            "description": "邮箱",
             "required": false,
+            "example": "{{your_email}}",
             "schema": {
               "type": "string"
             }
@@ -144,10 +145,12 @@
                 }
               },
               "example": {
-                "email": "test@example.com",
-                "password": "12345678",
-                "name": "吴晨",
-                "phone": "16656485702"
+                "email": "{{your_email}}",
+                "password": "{{your_paswrod}}",
+                "name": "name",
+                "phone": "11451419198",
+                "code": "000000",
+                "session": "{{vcode_session}}"
               }
             }
           }
@@ -225,8 +228,8 @@
                 }
               },
               "example": {
-                "email": "test@example.com",
-                "password": "12345678"
+                "email": "{{your_email}}",
+                "password": "{{your_password}}"
               }
             }
           }
@@ -365,11 +368,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ApiResponse"
                 }
               }
             },
@@ -531,7 +530,12 @@
                   }
                 }
               },
-              "examples": {}
+              "example": {
+                "name": "test",
+                "phone": "12345678910",
+                "avatar": "",
+                "role": "organizer"
+              }
             }
           }
         },
@@ -569,6 +573,7 @@
             "in": "query",
             "description": "页码",
             "required": false,
+            "example": 1,
             "schema": {
               "type": "integer",
               "default": 1
@@ -579,6 +584,7 @@
             "in": "query",
             "description": "每页数量",
             "required": false,
+            "example": 10,
             "schema": {
               "type": "integer",
               "default": 20
@@ -640,7 +646,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -693,7 +699,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -737,11 +743,12 @@
                 }
               },
               "example": {
-                "title": "我是一个非常聪明的辩题",
-                "proDescription": "正方是对的",
-                "conDescription": "反方是对的",
-                "background": "aute proident do",
-                "estimatedDuration": 18
+                "title": "擅自胡说麸皮麸皮好在",
+                "proDescription": "数位精铁。带活放。关支专出达。非整面片即较作由。影口住南示员。能加由广问十美集状精。",
+                "conDescription": "听地南太家组节把。拉厂圆除记院新整人些。今立体。因活市空化约。意种易连义许需。厂不群易消期两或知。消积儿家权机天行花。",
+                "background": "deserunt aute Excepteur",
+                "estimatedDuration": 4,
+                "order": 81
               }
             }
           }
@@ -792,7 +799,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -845,7 +852,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "example": "d92d9cb1-9ccc-44c1-8756-a407d05dcefa",
             "schema": {
               "type": "string"
             }
@@ -881,7 +888,7 @@
                 }
               },
               "example": {
-                "email": "test2@example.com",
+                "email": "{{your_email}}",
                 "permissions": [
                   "control",
                   "view"
@@ -924,7 +931,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -934,7 +941,7 @@
             "in": "path",
             "description": "协作者ID",
             "required": true,
-            "example": "3ba8dd43-d8f8-4282-8d77-53dd6226abb4",
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1004,7 +1011,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "0a380635-3f19-4c85-938b-d695c6900c78",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1014,7 +1021,7 @@
             "in": "path",
             "description": "协作者ID",
             "required": true,
-            "example": "3ba8dd43-d8f8-4282-8d77-53dd6226abb4",
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -1054,7 +1061,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1064,6 +1071,7 @@
             "in": "query",
             "description": "页码",
             "required": false,
+            "example": 1,
             "schema": {
               "type": "integer",
               "default": 1
@@ -1074,6 +1082,7 @@
             "in": "query",
             "description": "每页数量",
             "required": false,
+            "example": 100,
             "schema": {
               "type": "integer",
               "default": 50
@@ -1138,7 +1147,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1165,9 +1174,9 @@
                 }
               },
               "example": {
-                "name": "管建国",
-                "phone": "097 5786 4126",
-                "note": "ipsum"
+                "name": "艾婷婷",
+                "phone": "95075147492",
+                "note": "dolore culpa"
               }
             }
           }
@@ -1218,7 +1227,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1309,7 +1318,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1350,7 +1359,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1400,7 +1409,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1422,7 +1431,7 @@
                 }
               },
               "example": {
-                "debateId": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd"
+                "debateId": "{{debate_id_selected}}"
               }
             }
           }
@@ -1461,6 +1470,7 @@
             "in": "query",
             "description": "页码",
             "required": false,
+            "example": 1,
             "schema": {
               "type": "integer",
               "default": 1
@@ -1471,6 +1481,7 @@
             "in": "query",
             "description": "每页数量",
             "required": false,
+            "example": 12,
             "schema": {
               "type": "integer",
               "default": 20
@@ -1540,7 +1551,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -1608,24 +1619,26 @@
                 }
               },
               "example": {
-                "name": "测试活动",
-                "startTime": "2025-05-30 16:31:32",
-                "endTime": "2026-03-03 18:34:31",
-                "location": "non esse",
-                "description": "运率下局族先被干飞设。制率计放制。的联影收根。和采她光还很个水最技。上要交维安从影更装比。铁必史素标。",
-                "coverImage": "https://loremflickr.com/400/400?lock=7606246920429016",
-                "expectedParticipants": 2,
+                "name": "巴婷方",
+                "startTime": "2025-11-06 20:19:27",
+                "endTime": "2024-11-22 04:59:37",
+                "location": "commodo eiusmod",
+                "description": "情关真有。向流转适三标场体头。叫养证。活专联阶。济土传取经严而意容积。期感选命都高。",
+                "coverImage": "https://loremflickr.com/400/400?lock=823394680845060",
+                "expectedParticipants": 81,
                 "tags": [
-                  "reprehenderit"
+                  "amet sit esse",
+                  "officia ex dolore deserunt",
+                  "voluptate ut exercitation"
                 ],
                 "settings": {
                   "allowVoteChange": false,
-                  "maxVoteChanges": 68,
-                  "showRealTimeResults": false,
-                  "requireCheckIn": false,
+                  "maxVoteChanges": 30,
+                  "showRealTimeResults": true,
+                  "requireCheckIn": true,
                   "anonymousVoting": false,
-                  "autoLockVotes": true,
-                  "lockVoteDelay": 4
+                  "autoLockVotes": false,
+                  "lockVoteDelay": 81
                 }
               }
             }
@@ -1677,7 +1690,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "9797cc2b-534e-40c2-90d3-1774f5ae756b",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1727,7 +1740,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "9797cc2b-534e-40c2-90d3-1774f5ae756b",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1862,7 +1875,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1912,7 +1925,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -1971,7 +1984,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       },
@@ -1988,7 +2001,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -2028,7 +2041,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -2186,7 +2199,7 @@
                 }
               },
               "example": {
-                "activityId": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+                "activityId": "{{activity_id_selected}}",
                 "participantCode": "0001",
                 "deviceFingerprint": ""
               }
@@ -2273,7 +2286,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -2305,7 +2318,7 @@
                 }
               },
               "example": {
-                "sessionToken": "dae78ce6-acd8-4624-886b-72472608823e",
+                "sessionToken": "{{participant_session_token}}",
                 "position": "pro"
               }
             }
@@ -2417,7 +2430,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "$ref": "#/components/schemas/VoteStatus"
+                          "$ref": "#/components/schemas/ParticipantVoteStatus"
                         }
                       }
                     }
@@ -2449,7 +2462,7 @@
             "in": "path",
             "description": "辩题ID",
             "required": true,
-            "example": "2da4f916-7b2c-42ec-9ad6-e36f27bc5dcd",
+            "example": "{{debate_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -2501,7 +2514,7 @@
             "in": "path",
             "description": "参与者ID",
             "required": true,
-            "example": "ac6ee087-3e8c-4d1b-b9ad-fabc7910655f",
+            "example": "",
             "schema": {
               "type": "string"
             }
@@ -2626,7 +2639,7 @@
         },
         "security": [
           {
-            "bearerAuth": []
+            "bearer": []
           }
         ]
       }
@@ -2686,7 +2699,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -2696,6 +2709,7 @@
             "in": "query",
             "description": "显示类型",
             "required": false,
+            "example": "current_debate",
             "schema": {
               "type": "string",
               "enum": [
@@ -2829,7 +2843,7 @@
             "in": "path",
             "description": "活动ID",
             "required": true,
-            "example": "15bccc4b-0b03-481a-b4b8-2c5cc3942214",
+            "example": "{{activity_id_selected}}",
             "schema": {
               "type": "string"
             }
@@ -3184,6 +3198,325 @@
           }
         }
       },
+      "VoteResults": {
+        "type": "object",
+        "properties": {
+          "debateId": {
+            "type": "string",
+            "description": "辩题ID"
+          },
+          "totalVotes": {
+            "type": "integer",
+            "description": "总投票数"
+          },
+          "proVotes": {
+            "type": "integer",
+            "description": "正方最终票数"
+          },
+          "proPreviousVotes": {
+            "type": "integer",
+            "description": "正方初始票数"
+          },
+          "proToConVotes": {
+            "type": "integer",
+            "description": "正方到反方票数"
+          },
+          "conVotes": {
+            "type": "integer",
+            "description": "反方最终票数"
+          },
+          "conPreviousVotes": {
+            "type": "integer",
+            "description": "反方初始票数"
+          },
+          "conToProVotes": {
+            "type": "integer",
+            "description": "反方到正方票数"
+          },
+          "abstainVotes": {
+            "type": "integer",
+            "description": "中立最终票数"
+          },
+          "abstainPreviousVotes": {
+            "type": "integer",
+            "description": "中立初始票数"
+          },
+          "abstainToProVotes": {
+            "type": "integer",
+            "description": "中立到正方票数"
+          },
+          "abstainToConVotes": {
+            "type": "integer",
+            "description": "中立到反方票数"
+          },
+          "proScore": {
+            "type": "number",
+            "format": "float",
+            "description": "正方分数"
+          },
+          "conScore": {
+            "type": "number",
+            "format": "float",
+            "description": "反方分数"
+          },
+          "abstainPercentage": {
+            "type": "number",
+            "format": "float",
+            "description": "弃权率"
+          },
+          "winner": {
+            "type": "string",
+            "enum": [
+              "pro",
+              "con",
+              "tie"
+            ],
+            "description": "获胜方"
+          },
+          "isLocked": {
+            "type": "boolean",
+            "description": "结果是否已锁定"
+          },
+          "lockedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "锁定时间"
+          }
+        }
+      },
+      "VoteStats": {
+        "type": "object",
+        "properties": {
+          "totalVotes": {
+            "type": "integer",
+            "description": "总投票数"
+          },
+          "proVotes": {
+            "type": "integer",
+            "description": "正方票数"
+          },
+          "conVotes": {
+            "type": "integer",
+            "description": "反方票数"
+          },
+          "abstainVotes": {
+            "type": "integer",
+            "description": "弃权票数"
+          },
+          "proPercentage": {
+            "type": "number",
+            "format": "float",
+            "description": "正方得票率"
+          },
+          "conPercentage": {
+            "type": "number",
+            "format": "float",
+            "description": "反方得票率"
+          }
+        }
+      },
+      "ActivityDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Activity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "settings": {
+                "$ref": "#/components/schemas/ActivitySettings"
+              },
+              "collaborators": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Collaborator"
+                }
+              },
+              "debates": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Debate"
+                }
+              },
+              "currentDebate": {
+                "$ref": "#/components/schemas/Debate"
+              },
+              "statistics": {
+                "type": "object",
+                "properties": {
+                  "totalParticipants": {
+                    "type": "integer",
+                    "description": "总参与人数"
+                  },
+                  "checkedInParticipants": {
+                    "type": "integer",
+                    "description": "已入场人数"
+                  },
+                  "totalVotes": {
+                    "type": "integer",
+                    "description": "总投票数"
+                  },
+                  "totalDebates": {
+                    "type": "integer",
+                    "description": "辩题总数"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Debate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "辩题ID"
+          },
+          "activityId": {
+            "type": "string",
+            "description": "活动ID"
+          },
+          "title": {
+            "type": "string",
+            "description": "辩题标题"
+          },
+          "proDescription": {
+            "type": "string",
+            "description": "正方观点描述"
+          },
+          "conDescription": {
+            "type": "string",
+            "description": "反方观点描述"
+          },
+          "background": {
+            "type": "string",
+            "description": "辩题背景介绍"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "ongoing",
+              "final_vote",
+              "ended"
+            ],
+            "description": "辩题状态"
+          },
+          "estimatedDuration": {
+            "type": "integer",
+            "description": "预计辩论时长（分钟）"
+          },
+          "order": {
+            "type": "integer",
+            "description": "排序号"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "更新时间"
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DebateStage"
+            }
+          },
+          "currentStage": {
+            "$ref": "#/components/schemas/DebateStage"
+          }
+        },
+        "required": [
+          "stages",
+          "currentStage"
+        ]
+      },
+      "DebateDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Debate"
+          },
+          {
+            "$ref": "#/components/schemas/VoteStats"
+          }
+        ]
+      },
+      "DebateStage": {
+        "type": "object",
+        "properties": {
+          "stageName": {
+            "type": "string",
+            "description": "阶段名称"
+          },
+          "isDualSide": {
+            "type": "boolean",
+            "description": "是否双边辩论"
+          },
+          "sides": {
+            "type": "array",
+            "description": "辩手配置",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "辩手名称"
+                },
+                "duration": {
+                  "type": "integer",
+                  "description": "时长（秒）"
+                }
+              },
+              "required": [
+                "name",
+                "duration"
+              ]
+            }
+          },
+          "bellTimings": {
+            "type": "array",
+            "description": "铃声时间配置",
+            "items": {
+              "type": "object",
+              "properties": {
+                "time": {
+                  "type": "integer",
+                  "description": "时间点（秒）"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "start",
+                    "warning",
+                    "end"
+                  ],
+                  "description": "铃声类型"
+                }
+              },
+              "required": [
+                "time",
+                "type"
+              ]
+            }
+          },
+          "hideTimer": {
+            "type": "boolean",
+            "description": "是否隐藏计时器"
+          }
+        },
+        "required": [
+          "stageName",
+          "isDualSide",
+          "sides",
+          "bellTimings"
+        ],
+        "description": "阶段列表"
+      },
       "ApiResponse": {
         "type": "object",
         "properties": {
@@ -3367,57 +3700,6 @@
           }
         }
       },
-      "ActivityDetail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Activity"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "settings": {
-                "$ref": "#/components/schemas/ActivitySettings"
-              },
-              "collaborators": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Collaborator"
-                }
-              },
-              "debates": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Debate"
-                }
-              },
-              "currentDebate": {
-                "$ref": "#/components/schemas/Debate"
-              },
-              "statistics": {
-                "type": "object",
-                "properties": {
-                  "totalParticipants": {
-                    "type": "integer",
-                    "description": "总参与人数"
-                  },
-                  "checkedInParticipants": {
-                    "type": "integer",
-                    "description": "已入场人数"
-                  },
-                  "totalVotes": {
-                    "type": "integer",
-                    "description": "总投票数"
-                  },
-                  "totalDebates": {
-                    "type": "integer",
-                    "description": "辩题总数"
-                  }
-                }
-              }
-            }
-          }
-        ]
-      },
       "ActivitySettings": {
         "type": "object",
         "properties": {
@@ -3506,106 +3788,6 @@
             "description": "邀请时间"
           }
         }
-      },
-      "Debate": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "辩题ID"
-          },
-          "activityId": {
-            "type": "string",
-            "description": "活动ID"
-          },
-          "title": {
-            "type": "string",
-            "description": "辩题标题"
-          },
-          "proDescription": {
-            "type": "string",
-            "description": "正方观点描述"
-          },
-          "conDescription": {
-            "type": "string",
-            "description": "反方观点描述"
-          },
-          "background": {
-            "type": "string",
-            "description": "辩题背景介绍"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "pending",
-              "ongoing",
-              "final_vote",
-              "ended"
-            ],
-            "description": "辩题状态"
-          },
-          "estimatedDuration": {
-            "type": "integer",
-            "description": "预计辩论时长（分钟）"
-          },
-          "order": {
-            "type": "integer",
-            "description": "排序号"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "创建时间"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "更新时间"
-          }
-        }
-      },
-      "DebateDetail": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Debate"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "voteStats": {
-                "type": "object",
-                "properties": {
-                  "totalVotes": {
-                    "type": "integer",
-                    "description": "总投票数"
-                  },
-                  "proVotes": {
-                    "type": "integer",
-                    "description": "正方票数"
-                  },
-                  "conVotes": {
-                    "type": "integer",
-                    "description": "反方票数"
-                  },
-                  "abstainVotes": {
-                    "type": "integer",
-                    "description": "弃权票数"
-                  },
-                  "proPercentage": {
-                    "type": "number",
-                    "format": "float",
-                    "description": "正方得票率"
-                  },
-                  "conPercentage": {
-                    "type": "number",
-                    "format": "float",
-                    "description": "反方得票率"
-                  }
-                }
-              }
-            }
-          }
-        ]
       },
       "Participant": {
         "type": "object",
@@ -3723,7 +3905,7 @@
           }
         }
       },
-      "VoteStatus": {
+      "ParticipantVoteStatus": {
         "type": "object",
         "properties": {
           "hasVoted": {
@@ -3755,92 +3937,6 @@
           "canChange": {
             "type": "boolean",
             "description": "是否可以改票"
-          }
-        }
-      },
-      "VoteResults": {
-        "type": "object",
-        "properties": {
-          "debateId": {
-            "type": "string",
-            "description": "辩题ID"
-          },
-          "totalVotes": {
-            "type": "integer",
-            "description": "总投票数"
-          },
-          "proVotes": {
-            "type": "integer",
-            "description": "正方最终票数"
-          },
-          "proPreviousVotes": {
-            "type": "integer",
-            "description": "正方初始票数"
-          },
-          "proToConVotes": {
-            "type": "integer",
-            "description": "正方到反方票数"
-          },
-          "conVotes": {
-            "type": "integer",
-            "description": "反方最终票数"
-          },
-          "conPreviousVotes": {
-            "type": "integer",
-            "description": "反方初始票数"
-          },
-          "conToProVotes": {
-            "type": "integer",
-            "description": "反方到正方票数"
-          },
-          "abstainVotes": {
-            "type": "integer",
-            "description": "中立最终票数"
-          },
-          "abstainPreviousVotes": {
-            "type": "integer",
-            "description": "中立初始票数"
-          },
-          "abstainToProVotes": {
-            "type": "integer",
-            "description": "中立到正方票数"
-          },
-          "abstainToConVotes": {
-            "type": "integer",
-            "description": "中立到反方票数"
-          },
-          "proScore": {
-            "type": "number",
-            "format": "float",
-            "description": "正方分数"
-          },
-          "conScore": {
-            "type": "number",
-            "format": "float",
-            "description": "反方分数"
-          },
-          "abstainPercentage": {
-            "type": "number",
-            "format": "float",
-            "description": "弃权率"
-          },
-          "winner": {
-            "type": "string",
-            "enum": [
-              "pro",
-              "con",
-              "tie"
-            ],
-            "description": "获胜方"
-          },
-          "isLocked": {
-            "type": "boolean",
-            "description": "结果是否已锁定"
-          },
-          "lockedAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "锁定时间"
           }
         }
       },
@@ -4042,11 +4138,6 @@
       }
     },
     "securitySchemes": {
-      "bearerAuth": {
-        "bearerFormat": "JWT",
-        "type": "http",
-        "scheme": "bearer"
-      },
       "bearer": {
         "type": "http",
         "scheme": "bearer"
