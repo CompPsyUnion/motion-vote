@@ -2482,7 +2482,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "$ref": "#/components/schemas/VoteResults"
+                          "$ref": "#/components/schemas/VoteStats"
                         }
                       }
                     }
@@ -3198,7 +3198,7 @@
           }
         }
       },
-      "VoteResults": {
+      "VoteStats": {
         "type": "object",
         "properties": {
           "debateId": {
@@ -3281,37 +3281,6 @@
             "type": "string",
             "format": "date-time",
             "description": "锁定时间"
-          }
-        }
-      },
-      "VoteStats": {
-        "type": "object",
-        "properties": {
-          "totalVotes": {
-            "type": "integer",
-            "description": "总投票数"
-          },
-          "proVotes": {
-            "type": "integer",
-            "description": "正方票数"
-          },
-          "conVotes": {
-            "type": "integer",
-            "description": "反方票数"
-          },
-          "abstainVotes": {
-            "type": "integer",
-            "description": "弃权票数"
-          },
-          "proPercentage": {
-            "type": "number",
-            "format": "float",
-            "description": "正方得票率"
-          },
-          "conPercentage": {
-            "type": "number",
-            "format": "float",
-            "description": "反方得票率"
           }
         }
       },
@@ -3442,7 +3411,12 @@
             "$ref": "#/components/schemas/Debate"
           },
           {
-            "$ref": "#/components/schemas/VoteStats"
+            "type": "object",
+            "properties": {
+              "voteStats": {
+                "$ref": "#/components/schemas/VoteStats"
+              }
+            }
           }
         ]
       },
@@ -3953,8 +3927,8 @@
             "type": "boolean",
             "description": "是否显示投票数据"
           },
-          "voteResults": {
-            "$ref": "#/components/schemas/VoteResults"
+          "VoteStats": {
+            "$ref": "#/components/schemas/VoteStats"
           },
           "timestamp": {
             "type": "string",
@@ -4003,8 +3977,8 @@
                 "debate": {
                   "$ref": "#/components/schemas/Debate"
                 },
-                "voteResults": {
-                  "$ref": "#/components/schemas/VoteResults"
+                "VoteStats": {
+                  "$ref": "#/components/schemas/VoteStats"
                 }
               }
             }
@@ -4079,7 +4053,7 @@
                   "$ref": "#/components/schemas/Debate"
                 },
                 "results": {
-                  "$ref": "#/components/schemas/VoteResults"
+                  "$ref": "#/components/schemas/VoteStats"
                 },
                 "timeline": {
                   "type": "array",
