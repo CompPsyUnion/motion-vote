@@ -2820,21 +2820,10 @@
                     "type": "string",
                     "description": "控制动作",
                     "enum": [
-                      "switch_debate",
-                      "toggle_data",
-                      "show_cover",
-                      "toggle_timer",
-                      "start_timer",
-                      "pause_timer",
-                      "next_session",
-                      "past_session",
-                      "start_debate",
-                      "end_debate"
+                      "toggle_cover_page",
+                      "next_stage",
+                      "previous_stage"
                     ]
-                  },
-                  "debateId": {
-                    "type": "string",
-                    "description": "辩题ID（switch_debate时必需）"
                   }
                 }
               }
