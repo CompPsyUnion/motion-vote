@@ -2690,7 +2690,7 @@
             "name": "participantId",
             "in": "path",
             "description": "参与者ID",
-            "required": true,
+            "required": false,
             "example": "",
             "schema": {
               "type": "string"
