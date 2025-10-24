@@ -2690,13 +2690,43 @@
             "name": "participantId",
             "in": "path",
             "description": "参与者ID",
-            "required": false,
+            "required": true,
             "example": "",
             "schema": {
               "type": "string"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "生成成功",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/participants/qrcode": {
+      "get": {
+        "summary": "导出所有参与者二维码",
+        "deprecated": false,
+        "description": "生成参与者的入场二维码",
+        "tags": [
+          "participants"
+        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "生成成功",
