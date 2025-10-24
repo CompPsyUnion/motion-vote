@@ -2701,7 +2701,7 @@
           "200": {
             "description": "生成成功",
             "content": {
-              "image/png": {
+              "application/zip": {
                 "schema": {
                   "type": "string",
                   "format": "binary"
